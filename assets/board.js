@@ -27,6 +27,8 @@
 
   var active = { type: 'all', value: '' };
   var buttons = [];
+  var tagToggle = null;
+  var panel = null;
 
   function makeButton(label, type, value) {
     var b = document.createElement('button');
@@ -41,32 +43,55 @@
     return b;
   }
 
-  function makeRow(labelText, btns) {
-    var row = document.createElement('div');
-    row.className = 'frow';
-    var lab = document.createElement('span');
-    lab.className = 'lab';
-    lab.textContent = labelText;
-    row.appendChild(lab);
-    btns.forEach(function (b) { row.appendChild(b); });
-    return row;
-  }
-
   box.setAttribute('role', 'group');
   box.setAttribute('aria-label', 'Filter projects');
 
-  var kindButtons = [makeButton('All (' + total + ')', 'all', '')];
+  var row = document.createElement('div');
+  row.className = 'frow';
+  row.appendChild(makeButton('All (' + total + ')', 'all', ''));
   kindDefs.forEach(function (d) {
-    if (kindCount[d.key]) kindButtons.push(makeButton(d.label + ' (' + kindCount[d.key] + ')', 'kind', d.key));
+    if (kindCount[d.key]) row.appendChild(makeButton(d.label + ' (' + kindCount[d.key] + ')', 'kind', d.key));
   });
-  box.appendChild(makeRow('Show', kindButtons));
 
   var tagNames = Object.keys(tagCount).sort(function (a, b) { return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
   if (tagNames.length) {
-    box.appendChild(makeRow('Tags', tagNames.map(function (t) {
-      return makeButton(t + ' (' + tagCount[t] + ')', 'tag', t);
-    })));
+    tagToggle = document.createElement('button');
+    tagToggle.type = 'button';
+    tagToggle.className = 'fbtn';
+    tagToggle.setAttribute('aria-expanded', 'false');
+    tagToggle.setAttribute('aria-controls', 'tagpanel');
+    row.appendChild(tagToggle);
+
+    panel = document.createElement('div');
+    panel.className = 'tagpanel';
+    panel.id = 'tagpanel';
+    panel.hidden = true;
+    tagNames.forEach(function (t) {
+      panel.appendChild(makeButton(t + ' (' + tagCount[t] + ')', 'tag', t));
+    });
+    tagToggle.addEventListener('click', function () {
+      panel.hidden = !panel.hidden;
+      renderToggle();
+    });
   }
+
+  box.appendChild(row);
+  if (panel) box.appendChild(panel);
+
+  function renderToggle() {
+    if (!tagToggle) return;
+    var on = active.type === 'tag';
+    tagToggle.textContent = on ? 'Tags: ' + active.value : 'Tags';
+    tagToggle.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
+    tagToggle.className = 'fbtn' + (on ? ' has' : '');
+  }
+
+  function updateFade() {
+    var more = row.scrollWidth - row.clientWidth - row.scrollLeft > 4;
+    row.className = 'frow' + (more ? ' fade' : '');
+  }
+  row.addEventListener('scroll', updateFade);
+  window.addEventListener('resize', updateFade);
 
   function matches(li) {
     if (active.type === 'all') return true;
@@ -91,18 +116,32 @@
       b.setAttribute('aria-pressed', (b._type === active.type && b._value === active.value) ? 'true' : 'false');
     });
     if (empty) empty.hidden = shown !== 0;
-    if (active.type === 'all') {
-      status.textContent = '';
-    } else {
-      status.textContent = 'Showing ' + shown + ' of ' + total + ' project' + (total === 1 ? '' : 's') + '.';
-    }
+    status.textContent = active.type === 'all' ? '' :
+      'Showing ' + shown + ' of ' + total + ' project' + (total === 1 ? '' : 's') + '.';
+    renderToggle();
   }
 
   function setActive(type, value) {
     active = { type: type, value: value };
+    if (panel && type !== 'tag') panel.hidden = true;
+    if (panel && type === 'tag') panel.hidden = true;
     apply();
   }
 
+  // A link to a tile that a filter is hiding clears the filter first.
+  function revealHash() {
+    var id = decodeURIComponent((location.hash || '').slice(1));
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (el && el.hidden) {
+      setActive('all', '');
+      el.scrollIntoView();
+    }
+  }
+  window.addEventListener('hashchange', revealHash);
+
   box.hidden = false;
   apply();
+  updateFade();
+  revealHash();
 })();

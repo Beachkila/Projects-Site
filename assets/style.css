@@ -75,14 +75,35 @@ p { margin: 0 0 12px; }
 .howto summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; color: var(--link); }
 .howto div { padding: 0 0 4px; color: var(--mute); }
 
-.filters { margin: 16px 0 6px; }
-.frow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 8px; }
-.frow .lab { font-size: 13px; color: var(--mute); width: 44px; flex: none; }
-.fbtn { font: inherit; font-size: 15px; min-height: 44px; padding: 0 14px; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 4px; cursor: pointer; touch-action: manipulation; }
+.filters { margin: 14px 0 2px; }
+.frow { display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; padding: 2px 2px 8px; margin: 0 -2px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.frow.fade { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); }
+.fbtn { flex: none; white-space: nowrap; font: inherit; font-size: 15px; min-height: 44px; padding: 0 14px; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 4px; cursor: pointer; touch-action: manipulation; }
 .fbtn:hover { border-color: var(--mute); }
 .fbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 600; }
+.fbtn.has { border-color: var(--ink); font-weight: 600; }
 .fbtn:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
-.status { min-height: 22px; margin: 4px 0 6px; font-size: 14px; color: var(--mute); }
+.tagpanel { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 0 10px; }
+.status { margin: 2px 0 4px; font-size: 14px; color: var(--mute); }
+
+/* Top of the board */
+.glance { color: var(--mute); font-size: 15px; margin: 0 0 6px; max-width: 60ch; }
+h2.hd { font-size: 14px; font-weight: 600; color: var(--mute); border: 0; padding: 0; margin: 16px 0 6px; }
+.ovbox { position: relative; margin-top: 2px; }
+.ovbar { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; border-radius: 4px; background: linear-gradient(90deg,
+  hsl(25 var(--s) var(--l)), hsl(74 var(--s) var(--l)), hsl(122 var(--s) var(--l)), hsl(171 var(--s) var(--l)), hsl(220 var(--s) var(--l))); }
+.od { position: absolute; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%; background: hsl(var(--h) var(--s) var(--l)); border: 2px solid var(--bg); box-sizing: border-box; }
+.od:hover::after, .od:focus-visible::after { content: attr(data-name); position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 2px 8px; border-radius: 4px; font-size: 13px; white-space: nowrap; z-index: 3; }
+.od:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.ovcap { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--mute); margin: 6px 0 0; }
+.latest-list { list-style: none; margin: 0; padding: 0; }
+.latest-list li { border-bottom: 1px solid var(--line); }
+.latest-list a { display: flex; align-items: center; gap: 8px; min-height: 44px; color: var(--ink); text-decoration: none; }
+.latest-list a:hover .lt { text-decoration: underline; }
+.latest-list .ty { flex: none; font-size: 12px; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; }
+.latest-list .lt { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.latest-list time { flex: none; color: var(--mute); font-size: 13px; white-space: nowrap; }
+.tiles > li, .cp { scroll-margin-top: 16px; }
 
 .group h2 { display: flex; align-items: baseline; gap: 10px; }
 .count { font-size: 15px; font-weight: 400; color: var(--mute); }
@@ -144,6 +165,9 @@ article .chips { margin: 8px 0; }
 .badge.b-release { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .cp figure { margin: 10px 0; }
 .cp img { max-width: 100%; height: auto; border-radius: 4px; display: block; }
+figcaption { font-size: 14px; color: var(--mute); margin-top: 4px; }
+.heroimg { margin: 12px 0; }
+.heroimg img { display: block; max-width: 100%; max-height: 420px; width: auto; height: auto; border-radius: 6px; }
 
 /* Spectra page */
 .sec { display: flex; gap: 6px; letter-spacing: .08em; text-transform: uppercase; font-size: 18px; }
