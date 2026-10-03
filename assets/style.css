@@ -52,6 +52,10 @@ nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text
 nav a:hover { text-decoration: underline; }
 main { padding-top: 22px; padding-bottom: 48px; }
 footer.site { border-top: 1px solid var(--rule); color: var(--mute); font-size: 14px; padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+footer.site p { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; }
+footer.site a { display: inline-block; padding: 10px 0; }
+.subscribe { margin: 4px 0 0; font-size: 14px; }
+.subscribe a { display: inline-block; padding: 10px 0; }
 
 h1 { font-size: 28px; line-height: 1.2; margin: 6px 0 6px; font-weight: 700; }
 h2 { font-size: 21px; line-height: 1.3; margin: 34px 0 10px; padding-top: 18px; border-top: 1px solid var(--rule); font-weight: 700; }
