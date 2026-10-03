@@ -166,6 +166,21 @@ article .chips { margin: 8px 0; }
 .cp figure { margin: 10px 0; }
 .cp img { max-width: 100%; height: auto; border-radius: 4px; display: block; }
 figcaption { font-size: 14px; color: var(--mute); margin-top: 4px; }
+
+/* Timeline thumbnails and the pop-up */
+.cp .thumbs { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; padding: 0; }
+.cp .thumbs figure { margin: 0; width: 96px; }
+.cp .thumbs .th { display: block; border-radius: 4px; }
+.cp .thumbs .th:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.cp .thumbs img { width: 96px; height: 96px; object-fit: cover; border-radius: 4px; display: block; border: 1px solid var(--line); }
+.cp .thumbs figcaption { font-size: 12px; line-height: 1.35; margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+dialog.lightbox { max-width: min(96vw, 920px); max-height: 94vh; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); }
+dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
+.lightbox img { display: block; max-width: 100%; max-height: 72vh; width: auto; height: auto; margin: 0 auto; border-radius: 4px; }
+.lbcap { margin: 10px 0 0; font-size: 15px; color: var(--mute); }
+.lbbar { display: flex; justify-content: flex-end; margin: 0 0 8px; }
+.lbclose { font: inherit; font-size: 15px; min-height: 44px; padding: 0 16px; background: transparent; color: var(--ink); border: 1px solid var(--ink); border-radius: 4px; cursor: pointer; }
+.lbclose:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 .heroimg { margin: 12px 0; }
 .heroimg img { display: block; max-width: 100%; max-height: 420px; width: auto; height: auto; border-radius: 6px; }
 
