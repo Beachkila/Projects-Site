@@ -191,6 +191,13 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 /* Spectra page */
 .sec { display: flex; gap: 6px; letter-spacing: .08em; text-transform: uppercase; font-size: 18px; }
 .sec span { color: var(--mute); }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 26px 0 4px; border-bottom: 1px solid var(--rule); }
+.tabs [role="tab"] { font: inherit; font-size: 18px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 0 8px; min-height: 44px; cursor: pointer; }
+.tabs [role="tab"] span { color: var(--mute); font-weight: 400; }
+.tabs [role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.tabs [role="tab"]:hover { color: var(--ink); }
+.tabs [role="tab"]:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.has-tabs .tabpanel > h2.sec { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; border: 0; }
 .sgrid { display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 8px; }
 .gradbar { height: 8px; border-radius: 4px; background: linear-gradient(90deg,
   hsl(25 var(--s) var(--l)), hsl(74 var(--s) var(--l)), hsl(122 var(--s) var(--l)), hsl(171 var(--s) var(--l)), hsl(220 var(--s) var(--l))); }
