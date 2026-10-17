@@ -217,4 +217,52 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 .nm { color: var(--mute); font-size: 14px; }
 .note { color: var(--mute); font-size: 14px; }
 
+/* Skills page. Status shades come from the theme tokens: public is ink, working is mute, in progress is line. */
+.st-public { fill: var(--ink); background: var(--ink); }
+.st-private { fill: var(--mute); background: var(--mute); }
+.st-progress { fill: var(--line); background: var(--line); }
+.sk-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 14px 0 10px; max-width: 420px; }
+.sk-stats div { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+.sk-stats span { display: block; color: var(--mute); font-size: 13px; }
+.sk-stats strong { font-size: 24px; font-weight: 600; }
+.sk-lbar { display: block; width: 100%; height: 14px; border-radius: 3px; margin: 4px 0 10px; }
+.sk-lbar rect { fill: hsl(var(--h) var(--s) var(--l)); }
+.sk-lbar rect.dim, .sk-tree .tm.dim { opacity: .25; }
+.sk-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sk-chip { font: inherit; font-size: 14px; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; min-height: 44px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.sk-chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.sk-chip:focus-visible, .sk-card summary:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.sk-dot { width: 10px; height: 10px; border-radius: 2px; background: hsl(var(--h) var(--s) var(--l)); flex: none; display: inline-block; }
+.sk-tree, .sk-bars { display: block; width: 100%; height: auto; max-width: 720px; }
+.sk-tree .tm rect { stroke: var(--bg); stroke-width: 1; }
+.sk-tree .tm.st-public rect { fill: var(--ink); }
+.sk-tree .tm.st-private rect { fill: var(--mute); }
+.sk-tree .tm.st-progress rect { fill: var(--line); }
+.sk-tree text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.sk-tree .tl { font-size: 12px; font-weight: 600; }
+.sk-tree .ts { font-size: 10px; font-weight: 600; }
+.sk-tree .tn { font-size: 10px; }
+.sk-tree .st-public text, .sk-tree .st-private text { fill: var(--bg); }
+.sk-tree .st-progress text { fill: var(--ink); }
+.sk-tree .tm:focus-visible rect, .sk-tree .tm:hover rect { stroke: var(--ring); stroke-width: 2.5; }
+.sk-bars .bl { font-size: 12px; fill: var(--ink); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.sk-bars .bt { fill: none; stroke: var(--rule); }
+.sk-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--mute); font-size: 13px; margin: 6px 0 4px; }
+.sk-legend > span, .sk-st { display: inline-flex; align-items: center; gap: 6px; }
+.sk-key { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sk-card { border-top: 1px solid var(--rule); }
+.sk-card summary { cursor: pointer; min-height: 48px; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 17px; }
+.sk-list { list-style: none; margin: 0 0 12px; padding: 0; }
+.sk-list li { padding: 10px 0; border-top: 1px solid var(--line); }
+.sk-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; align-items: baseline; }
+.sk-name { font-weight: 600; }
+.sk-name a { display: inline-block; padding: 4px 0; }
+.sk-sup { color: var(--mute); font-size: 13px; font-weight: 400; }
+.sk-st { color: var(--mute); font-size: 13px; }
+.sk-langs { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; }
+.sk-lang { display: inline-flex; align-items: center; gap: 5px; color: var(--mute); font-size: 13px; }
+.sk-nocode { color: var(--mute); font-size: 13px; }
+.sk-links { display: flex; flex-wrap: wrap; gap: 0 16px; font-size: 14px; }
+.sk-links a { display: inline-block; padding: 8px 0; }
+
 @media print { body { background: #fff; color: #000; } header.site nav, .skip { display: none; } }
