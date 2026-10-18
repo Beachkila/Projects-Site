@@ -124,6 +124,16 @@ h2.hd { font-size: 14px; font-weight: 600; color: var(--mute); border: 0; paddin
 .gly .glyph { width: 40px; height: 40px; }
 .tbadge { position: absolute; right: 4px; bottom: 4px; width: 22px; height: 22px; border-radius: 50%; background: hsl(var(--h) var(--s) var(--l)); border: 1.5px solid var(--card); color: var(--bg); display: flex; align-items: center; justify-content: center; }
 .tbadge .glyph { width: 13px; height: 13px; }
+/* Inline project glyphs on the project, Mediums and Stack pages. */
+.gtag { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.gtag .glyph { display: block; }
+.ptitle { display: flex; align-items: center; gap: 10px; }
+.g-title { color: hsl(var(--h) var(--s) var(--l)); }
+.g-title .glyph { width: 28px; height: 28px; }
+.g-list { color: hsl(var(--h) var(--s) var(--l)); align-self: center; margin-right: 2px; }
+.g-list .glyph { width: 20px; height: 20px; }
+.g-sk { color: var(--mute); margin-right: 7px; vertical-align: -4px; }
+.g-sk .glyph { width: 17px; height: 17px; }
 .tb h3 { font-size: 18px; margin: 0 0 2px; line-height: 1.25; }
 .tb p { margin: 0 0 6px; }
 .desc { color: var(--mute); font-size: 15px; line-height: 1.45; }
