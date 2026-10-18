@@ -269,6 +269,7 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 .sk-langs { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; }
 .sk-lang { display: inline-flex; align-items: center; gap: 5px; color: var(--mute); font-size: 13px; }
 .sk-nocode { color: var(--mute); font-size: 13px; }
+.sk-note { color: var(--mute); font-size: 14px; max-width: 60ch; margin: 6px 0 14px; }
 .sk-links { display: flex; flex-wrap: wrap; gap: 0 16px; font-size: 14px; }
 .sk-links a { display: inline-block; padding: 8px 0; }
 @media (min-width: 720px) {
