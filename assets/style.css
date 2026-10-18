@@ -203,6 +203,9 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
   hsl(25 var(--s) var(--l)), hsl(74 var(--s) var(--l)), hsl(122 var(--s) var(--l)), hsl(171 var(--s) var(--l)), hsl(220 var(--s) var(--l))); }
 .srows { list-style: none; margin: 14px 0 0; padding: 0; }
 .srow { padding: 12px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr; gap: 4px; }
+/* On the Code and Art tabs the axes key sticks to the top as the rows scroll under it. */
+.tabpanel .sgrid { position: sticky; top: 0; z-index: 5; background: var(--bg); margin-top: 0; padding: 10px 0 8px; border-bottom: 1px solid var(--line); }
+
 .slabel { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; font-weight: 600; }
 .slabel a { padding: 6px 0; }
 .also { font-size: 13px; font-weight: 400; color: var(--mute); }
