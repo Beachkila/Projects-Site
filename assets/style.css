@@ -1,30 +1,17 @@
 /* Colors for projects are generated from data and arrive as --h (a hue) on each element.
    Everything else comes from the tokens below. Change the look here. */
 :root {
-  --bg: #0b1822;
-  --card: #10222e;
-  --ink: #eaf0f3;
-  --mute: #9fb0ba;
-  --rule: #1f4551;
-  --line: #2a4755;
-  --link: #86d6e4;
+  /* Matched to studiowetware.com: black ground, warm off-white type, neutral greys. */
+  --bg: #000000;
+  --card: #111110;
+  --ink: #fcfbf8;
+  --mute: #9a9996;
+  --rule: #3a3a3a;
+  --line: #242321;
+  --link: #fcfbf8;
   --ring: #f2b84b;
   --s: 62%;
   --l: 62%;
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #f3f5f4;
-    --card: #ffffff;
-    --ink: #14212b;
-    --mute: #4c5d68;
-    --rule: #9db3bb;
-    --line: #c5d2d8;
-    --link: #0f5f6e;
-    --ring: #9a5b00;
-    --s: 60%;
-    --l: 38%;
-  }
 }
 
 * { box-sizing: border-box; }
@@ -33,7 +20,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font: 16px/1.6 ABeeZee, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   overflow-wrap: anywhere;
 }
 .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
@@ -45,7 +32,9 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--ring); outline
 
 header.site { border-bottom: 1px solid var(--rule); padding-top: env(safe-area-inset-top); }
 header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 20px; padding-top: 12px; padding-bottom: 10px; }
-.brand { color: var(--ink); font-weight: 700; text-decoration: none; letter-spacing: .02em; padding: 8px 0; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-size: 20px; line-height: 1; font-weight: 400; text-transform: uppercase; text-decoration: none; letter-spacing: .04em; padding: 8px 0; }
+/* The logo is as tall as the header text line. */
+.brand .logo { display: block; width: auto; height: 1em; }
 nav { display: flex; flex-wrap: wrap; gap: 4px 18px; }
 nav a { padding: 10px 0; text-decoration: none; }
 nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-underline-offset: 6px; }
