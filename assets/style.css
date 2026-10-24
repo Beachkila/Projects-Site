@@ -38,7 +38,8 @@ header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; justify
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-size: 20px; line-height: 1; font-weight: 400; text-transform: uppercase; text-decoration: none; letter-spacing: .04em; padding: 8px 0; }
 /* The logo is as tall as the header text line. */
 .brand .logo { display: block; width: auto; height: 1em; }
-nav { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+/* The menu spreads across the full width on phones: first item on the left edge, last on the right, equal gaps between. */
+nav { display: flex; flex: 1 1 100%; justify-content: space-between; gap: 4px 18px; }
 nav a { padding: 10px 0; text-decoration: none; }
 nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-underline-offset: 6px; }
 nav a:hover { text-decoration: underline; }
@@ -50,6 +51,8 @@ footer.site a { display: inline-block; padding: 10px 0; }
 .subscribe a { display: inline-block; padding: 10px 0; }
 
 h1 { font-size: 28px; line-height: 1.2; margin: 6px 0 6px; font-weight: 700; }
+/* Page titles (Projects, Mediums, Stack) in the main site's heading style: regular weight, uppercase, wide spacing. */
+h1.pagetitle { font-size: 24px; font-weight: 400; text-transform: uppercase; letter-spacing: .14em; }
 h2 { font-size: 21px; line-height: 1.3; margin: 34px 0 10px; padding-top: 18px; border-top: 1px solid var(--rule); font-weight: 700; }
 h3 { font-size: 17px; line-height: 1.35; margin: 6px 0 6px; font-weight: 600; }
 p { margin: 0 0 12px; }
@@ -201,8 +204,9 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 /* Spectra page */
 .sec { display: flex; gap: 6px; letter-spacing: .08em; text-transform: uppercase; font-size: 18px; }
 .sec span { color: var(--mute); }
-.tabs { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 26px 0 4px; border-bottom: 1px solid var(--rule); }
-.tabs [role="tab"] { font: inherit; font-size: 18px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 0 8px; min-height: 44px; cursor: pointer; }
+/* Tabs split the row into equal columns, each label centered over its own underline. */
+.tabs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; margin: 26px 0 4px; border-bottom: 1px solid var(--rule); }
+.tabs [role="tab"] { text-align: center; white-space: nowrap; font: inherit; font-size: 18px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 0 8px; min-height: 44px; cursor: pointer; }
 .tabs [role="tab"] span { color: var(--mute); font-weight: 400; }
 .tabs [role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
 .tabs [role="tab"]:hover { color: var(--ink); }
@@ -221,6 +225,7 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 .also { font-size: 13px; font-weight: 400; color: var(--mute); }
 .srow .ribbon { height: 40px; }
 @media (min-width: 720px) {
+  nav { flex: 0 0 auto; justify-content: flex-end; gap: 4px 28px; }
   .sgrid, .srow { grid-template-columns: 220px 1fr; column-gap: 16px; }
   .sgrid .axes, .sgrid .gradbar { grid-column: 2; }
 }
@@ -295,7 +300,7 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 @media print { body { background: #fff; color: #000; } header.site nav, .skip { display: none; } }
 
 /* Stage tabs on the board. The section heading stays for screen readers. */
-.stagetabs { margin-top: 22px; }
+
 .has-stagetabs .group > h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; border: 0; }
 footer.site .glance { display: block; margin: 0; padding: 14px 0 4px; font-size: 14px; }
 
