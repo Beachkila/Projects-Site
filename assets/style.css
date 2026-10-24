@@ -301,3 +301,7 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 }
 
 @media print { body { background: #fff; color: #000; } header.site nav, .skip { display: none; } }
+
+/* Stage tabs on the board. The section heading stays for screen readers. */
+.stagetabs { margin-top: 22px; }
+.has-stagetabs .group > h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; border: 0; }

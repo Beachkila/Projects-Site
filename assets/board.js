@@ -1,3 +1,56 @@
+// Stage tabs for the board (Building, Complete). Without this file the stage sections stack.
+(function () {
+  var list = document.querySelector('.stagetabs[role="tablist"]');
+  if (!list) return;
+  var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+  var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+  list.hidden = false;
+  document.body.classList.add('has-stagetabs');
+  panels.forEach(function (p, i) {
+    p.setAttribute('role', 'tabpanel');
+    p.setAttribute('aria-labelledby', tabs[i].id);
+  });
+
+  function select(i, focus) {
+    tabs.forEach(function (t, j) {
+      var on = i === j;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      panels[j].hidden = !on;
+    });
+    if (focus) tabs[i].focus();
+    document.dispatchEvent(new CustomEvent('stagetab'));
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () {
+      select(i, false);
+      history.replaceState(null, '', '#' + panels[i].id);
+    });
+    t.addEventListener('keydown', function (e) {
+      var k = e.key, n = tabs.length, to = -1;
+      if (k === 'ArrowRight') to = (i + 1) % n;
+      else if (k === 'ArrowLeft') to = (i - 1 + n) % n;
+      else if (k === 'Home') to = 0;
+      else if (k === 'End') to = n - 1;
+      if (to >= 0) { e.preventDefault(); select(to, true); }
+    });
+  });
+
+  // Links like #tile-bang (from the spectrum overview) or #stage-complete open the tab that holds the target.
+  function fromHash(first) {
+    var id = decodeURIComponent((location.hash || '').slice(1));
+    var el = id && document.getElementById(id);
+    var idx = -1;
+    if (el) panels.forEach(function (p, j) { if (p === el || p.contains(el)) idx = j; });
+    if (idx === -1) { if (first) select(0, false); return; }
+    select(idx, false);
+    if (el !== panels[idx]) el.scrollIntoView();
+  }
+  window.addEventListener('hashchange', function () { fromHash(false); });
+  fromHash(true);
+})();
+
 // Filters for the board. The board works without this file: you just get the full grouped list.
 (function () {
   var box = document.getElementById('filters');
@@ -106,16 +159,25 @@
       li.hidden = !ok;
       if (ok) shown++;
     });
+    var tabbed = document.body.classList.contains('has-stagetabs');
+    var inView = shown;
     groups.forEach(function (g) {
       var n = g.querySelectorAll('.tiles > li:not([hidden])').length;
-      g.hidden = n === 0;
       var c = g.querySelector('.count');
       if (c) c.textContent = n;
+      if (tabbed) {
+        // The tabs decide which stage shows; the filter only updates each tab's count.
+        var tab = document.querySelector('[aria-controls="' + g.id + '"] .count');
+        if (tab) tab.textContent = n;
+        if (!g.hidden) inView = n;
+      } else {
+        g.hidden = n === 0;
+      }
     });
     buttons.forEach(function (b) {
       b.setAttribute('aria-pressed', (b._type === active.type && b._value === active.value) ? 'true' : 'false');
     });
-    if (empty) empty.hidden = shown !== 0;
+    if (empty) empty.hidden = inView !== 0;
     status.textContent = active.type === 'all' ? '' :
       'Showing ' + shown + ' of ' + total + ' project' + (total === 1 ? '' : 's') + '.';
     renderToggle();
@@ -139,6 +201,7 @@
     }
   }
   window.addEventListener('hashchange', revealHash);
+  document.addEventListener('stagetab', apply);
 
   box.hidden = false;
   apply();
