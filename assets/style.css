@@ -3,11 +3,14 @@
 :root {
   /* Matched to studiowetware.com: black ground, warm off-white type, neutral greys. */
   --bg: #000000;
-  --card: #111110;
+  --card: #1c1c1b;
   --ink: #fcfbf8;
-  --mute: #9a9996;
+  --mute: #cfcdc8;
   --rule: #3a3a3a;
-  --line: #242321;
+  --line: #2c2b29;
+  --edge: #45443f;
+  --shade-mid: #9a9996;
+  --shade-low: #242321;
   --link: #fcfbf8;
   --ring: #f2b84b;
   --s: 62%;
@@ -103,8 +106,8 @@ h2.hd { font-size: 14px; font-weight: 600; color: var(--mute); border: 0; paddin
 .group h2 { display: flex; align-items: baseline; gap: 10px; }
 .count { font-size: 15px; font-weight: 400; color: var(--mute); }
 .tiles { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 12px; }
-.tile { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; height: 100%; padding: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 6px; color: var(--ink); text-decoration: none; }
-.tile:hover { border-color: var(--mute); }
+.tile { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; height: 100%; padding: 12px; background: var(--card); border: 1.5px solid rgba(252, 251, 248, .7); border-radius: 6px; color: var(--ink); text-decoration: none; box-shadow: 0 6px 18px rgba(252, 251, 248, .07), 0 1px 3px rgba(252, 251, 248, .06); }
+.tile:hover { border-color: var(--ink); box-shadow: 0 8px 22px rgba(252, 251, 248, .11), 0 1px 3px rgba(252, 251, 248, .08); }
 .thumb { width: 72px; height: 72px; border-radius: 4px; overflow: hidden; background: var(--bg); position: relative; display: flex; align-items: center; justify-content: center; }
 .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ph { font-size: 24px; font-weight: 700; color: hsl(var(--h) var(--s) var(--l)); }
@@ -234,10 +237,10 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 .nm { color: var(--mute); font-size: 14px; }
 .note { color: var(--mute); font-size: 14px; }
 
-/* Skills page. Status shades come from the theme tokens: public is ink, working is mute, in progress is line. */
+/* Skills page. Three fixed greyscale shades: public is ink, working is mid grey, in progress is low grey. */
 .st-public { fill: var(--ink); background: var(--ink); }
-.st-private { fill: var(--mute); background: var(--mute); }
-.st-progress { fill: var(--line); background: var(--line); }
+.st-private { fill: var(--shade-mid); background: var(--shade-mid); }
+.st-progress { fill: var(--shade-low); background: var(--shade-low); }
 .sk-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 14px 0 10px; max-width: 420px; }
 .sk-stats div { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
 .sk-stats span { display: block; color: var(--mute); font-size: 13px; }
@@ -253,8 +256,8 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 .sk-tree, .sk-bars { display: block; width: 100%; height: auto; max-width: 720px; }
 .sk-tree .tm rect { stroke: var(--bg); stroke-width: 1; }
 .sk-tree .tm.st-public rect { fill: var(--ink); }
-.sk-tree .tm.st-private rect { fill: var(--mute); }
-.sk-tree .tm.st-progress rect { fill: var(--line); }
+.sk-tree .tm.st-private rect { fill: var(--shade-mid); }
+.sk-tree .tm.st-progress rect { fill: var(--shade-low); }
 .sk-tree text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 .sk-tree .tl { font-size: 12px; font-weight: 600; }
 .sk-tree .ts { font-size: 10px; font-weight: 600; }
@@ -295,3 +298,5 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
 .stagetabs { margin-top: 22px; }
 .has-stagetabs .group > h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; border: 0; }
 footer.site .glance { display: block; margin: 0; padding: 14px 0 4px; font-size: 14px; }
+
+.lat { margin-top: 28px; }
